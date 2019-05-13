@@ -8,11 +8,24 @@ gc_re = r'^[ATGC]+$'
 data = []
 
 found = True
+count = 0
 for i in nucleotides:
-	count = 0
 	m = re.search(gc_re, i, flags=re.I)
 	if m:
-		
+		count += len(m.group())
+	else:
+		if count:
+			data.append(count)
+			count = 0
+
+
+def count(nucleotides):
+	count = 0
+	for i in nucleotides:
+		m = re.search(line_re, i, flags=re.I)
+		if m:
+			
+
 		
 
 
