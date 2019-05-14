@@ -22,36 +22,45 @@ gc_re = r'^[ATGC]+$'
 def count(nucleotides):
 	count = 0
 	data1 = ''
+	final_data = []
 	for i in nucleotides:
 		m = re.search(gc_re, i, flags=re.I)
 		if m:
 			pass
 		else:
-			strings(data1)
+			dictionary = strings(data1)
+			if dictionary not in final_data:
+				if dictionary:
+					final_data.append(dictionary)
 			data1 = ''
 		data1 += i
-	strings(data1)
+	dictionary = strings(data1)
+	if dictionary not in final_data:
+		final_data.append(dictionary)
+	sorted_data = sorted(final_data, key = lambda i: i['gc_percent'],reverse=True)
+	print(sorted_data[0]['name'])
+	print(sorted_data[0]['gc_percent'])
 
 		
 def strings(content):
 	finalData = []
 	realData = content.splitlines()
 	dicti = {}
-	count = 0
+	count1 = 0
 	for nucleo in realData:
 		name = re.search(line_re, nucleo, flags=re.I)
 		if name:
 			dicti['name'] = name.group()
 		count = re.search(gc_re, nucleo, flags=re.I)
 		if count:
-			length = str(count.group())
-			print(length)
-			# count += length
+			length = int(len(str(count.group())))
+			count1 += length
 	gcContent = len(re.findall(r'[GC]', content))
 	if gcContent:
 		dicti['GC'] = gcContent
-	# dicti['count'] = count
-	print(dicti, "This is dicti")
+		gc_percent = (gcContent / count1) * 100
+		dicti['gc_percent'] = gc_percent
+	return dicti
 
 
 
