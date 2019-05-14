@@ -38,6 +38,7 @@ def count(nucleotides):
 	if dictionary not in final_data:
 		final_data.append(dictionary)
 	sorted_data = sorted(final_data, key = lambda i: i['gc_percent'],reverse=True)
+	print(sorted_data)
 	print(sorted_data[0]['name'])
 	print(sorted_data[0]['gc_percent'])
 
