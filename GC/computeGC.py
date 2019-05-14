@@ -5,19 +5,6 @@ import re
 line_re = r'^\>[a-z]+\_(\d{0,4})'
 gc_re = r'^[ATGC]+$'
 
-# data = []
-
-# found = True
-# count = 0
-# for i in nucleotides:
-# 	m = re.search(gc_re, i, flags=re.I)
-# 	if m:
-# 		count += len(m.group())
-# 	else:
-# 		if count:
-# 			data.append(count)
-# 			count = 0
-
 
 def count(nucleotides):
 	count = 0
@@ -38,7 +25,6 @@ def count(nucleotides):
 	if dictionary not in final_data:
 		final_data.append(dictionary)
 	sorted_data = sorted(final_data, key = lambda i: i['gc_percent'],reverse=True)
-	print(sorted_data)
 	print(sorted_data[0]['name'])
 	print(sorted_data[0]['gc_percent'])
 
